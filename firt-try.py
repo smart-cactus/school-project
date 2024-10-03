@@ -101,23 +101,33 @@ materials = [
     "Водород",
     "Неон"
 ]
-
+print("Список доступных материалов")
 for material in materials:
     print(material)
 
-
-material1 = input("введите название первого материала из списка") 
-material2 = input("введите название второго материала из списка")
+print("Хотите добавить новый материал?")
+answer = int(input("Напишите '0' если нет, или '1' если да"))
+if answer:
+    while True:
+        name0 = input("введите название нового материала")
+        materials.append(name0)
+        materials_properties_SI[name0] = {"плотность (кг/м³)": input("введите значение плотности в (кг/м³)"), "теплопроводность (Вт/(м·К))": input("введите значение теплопроводности в (Вт/(м·К))")}
+        print("Хотите добавить ещё новый материал?")
+        if not int(input("Напишите '0' если нет, или '1' если да")):
+            break
+for material in materials:
+    print(material)
+material1 = input("введите название материала из списка") 
+material2 = input("введите название материала из списка")
 
 if material1 not in materials:
     print("Ошибка: материал отсутствует в списке. Пожалуйста, введите один из следующих материалов:")
-    print(", ".join(material1))
+    print("".join(material1))
 else:
     print(f"Вы выбрали материал: {material1}")
 
 if material2 not in materials:
     print("Ошибка: материал отсутствует в списке. Пожалуйста, введите один из следующих материалов:")
-    print(", ".join(material2))
+    print("".join(material2))
 else:
     print(f"Вы выбрали материал: {material2}")
-
