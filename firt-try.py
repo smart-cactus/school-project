@@ -131,3 +131,5 @@ if material2 not in materials:
     print("".join(material2))
 else:
     print(f"Вы выбрали материал: {material2}")
+
+
