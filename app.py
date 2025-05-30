@@ -209,9 +209,15 @@ def index():
             Q_conduction = heat_transfer.conduction(k, delta_T, d)
             conduction_result = f"Теплопередача по проводимости: {Q_conduction:.2f} Вт"
 
-            m = area * d * density
-            Q = m * delta_T * specific_heat
-            t = Q / Q_conduction
+            V = area * d
+            T0 = T1
+            T1_env = T2
+            T = T1_env + 0.9 * (T0 - T1_env)  # конечная температура тела — 90% приближение
+            try:
+                ln_part = np.log((T - T1_env) / (T0 - T1_env))
+                t = (-density * specific_heat * V) / (k * area) * ln_part
+            except ValueError:
+                t = None  # если логарифм невалиден (например, деление на 0 или отрицательное значение)
 
             # Визуализация графика теплопередачи по проводимости
             plt.figure(figsize=(12, 6))
